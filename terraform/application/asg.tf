@@ -25,8 +25,6 @@ sudo chmod 2775 /var/www
 sudo find /var/www -type d -exec chmod 2775 {} \;
 sudo find /var/www -type f -exec chmod 0664 {} \;
 
-#######################################################################################
-
 EFSFSID=$(aws ssm get-parameters --region eu-west-1 --names /A4L/Wordpress/EFSFSID --query Parameters[0].Value)
 EFSFSID=`echo $EFSFSID | sed -e 's/^"//' -e 's/"$//'`
 echo -e "$EFSFSID:/ /var/www/html/wp-content efs _netdev,tls,iam 0 0" >> /etc/fstab
@@ -47,28 +45,11 @@ DBName=`echo $DBName | sed -e 's/^"//' -e 's/"$//'`
 DBEndpoint=$(aws ssm get-parameters --region eu-west-1 --names /A4L/Wordpress/DBEndpoint --query Parameters[0].Value)
 DBEndpoint=`echo $DBEndpoint | sed -e 's/^"//' -e 's/"$//'`
 
-#####################################################################################
-
-
 sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo sed -i "s/'database_name_here'/'$DBName'/g" /var/www/html/wp-config.php
 sudo sed -i "s/'username_here'/'$DBUser'/g" /var/www/html/wp-config.php
 sudo sed -i "s/'password_here'/'$DBPassword'/g" /var/www/html/wp-config.php
-## Uncomment this line when you migrate to RDS DB.
 sudo sed -i "s/'localhost'/'$DBEndpoint'/g" /var/www/html/wp-config.php
-
-####################################################################################
-
-##sudo systemctl enable mariadb
-##sudo systemctl start mariadb
-##sudo mysqladmin -u root password $DBRootPassword
-####
-##sudo echo "CREATE DATABASE $DBName;" >> /tmp/db.setup
-##sudo echo "CREATE USER '$DBUser'@'localhost' IDENTIFIED BY '$DBPassword';" >> /tmp/db.setup
-##sudo echo "GRANT ALL ON $DBName.* TO '$DBUser'@'localhost';" >> /tmp/db.setup
-##sudo echo "FLUSH PRIVILEGES;" >> /tmp/db.setup
-##sudo mysql -u root --password=$DBRootPassword < /tmp/db.setup
-##sudo rm /tmp/db.setup
 
 EOF
 
