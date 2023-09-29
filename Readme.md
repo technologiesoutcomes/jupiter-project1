@@ -36,4 +36,7 @@ Resource Optimization: By tracking resource usage, organizations can rightsize r
 
 Streamlined Operations: Automated workflows and integrations reduce manual effort, allowing teams to focus on core business activities
 
-### Three-tier app
+### References
+
+https://github.com/aws-samples/aws-refarch-wordpress
+
