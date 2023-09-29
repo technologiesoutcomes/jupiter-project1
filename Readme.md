@@ -38,6 +38,6 @@ Streamlined Operations: Automated workflows and integrations reduce manual effor
 
 ### References
 
-https://github.com/aws-samples/aws-refarch-wordpress
-https://aws.amazon.com/blogs/startups/how-to-accelerate-your-wordpress-site-with-amazon-cloudfront/
+* https://github.com/aws-samples/aws-refarch-wordpress
+* https://aws.amazon.com/blogs/startups/how-to-accelerate-your-wordpress-site-with-amazon-cloudfront/
 
